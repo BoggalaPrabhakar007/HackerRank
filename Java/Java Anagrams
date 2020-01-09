@@ -1,0 +1,89 @@
+/*
+
+Two strings,  and , are called anagrams if they contain all the same characters in the same frequencies. For example, the anagrams of CAT are CAT, ACT, TAC, TCA, ATC, and CTA.
+
+Complete the function in the editor. If  and  are case-insensitive anagrams, print "Anagrams"; otherwise, print "Not Anagrams" instead.
+
+Input Format
+
+The first line contains a string denoting .
+The second line contains a string denoting .
+
+Constraints
+
+Strings  and  consist of English alphabetic characters.
+The comparison should NOT be case sensitive.
+Output Format
+
+Print "Anagrams" if  and  are case-insensitive anagrams of each other; otherwise, print "Not Anagrams" instead.
+
+Sample Input 0
+
+anagram
+margana
+Sample Output 0
+
+Anagrams
+*/
+
+
+import java.util.Scanner;
+
+public class Solution {
+
+    static boolean isAnagram(String a, String b) {
+        a=a.toLowerCase();
+        b=b.toLowerCase();
+         if(a.length()!=b.length())
+         {
+             return false;
+         }
+        char[] arr1=a.toCharArray();
+        char[] arr2=b.toCharArray();
+        for(int i=0;i<arr1.length-1;i++)
+        {
+            for(int j=0;j<arr1.length-i-1;j++)
+            {
+                int compareOneTwo = Character.compare(arr1[j], arr1[j+1]);               
+                if(compareOneTwo>0)
+                {
+                    char ch=arr1[j];
+                    arr1[j]=arr1[j+1];
+                    arr1[j+1]=ch;
+
+                }
+            }
+        }
+        for(int i=0;i<arr2.length-1;i++)
+        {
+            for(int j=0;j<arr2.length-i-1;j++)
+            {
+                int compareOneTwo = Character.compare(arr2[j], arr2[j+1]);
+                if(compareOneTwo>0)
+                {
+                    char ch=arr2[j];
+                    arr2[j]=arr2[j+1];
+                    arr2[j+1]=ch;
+                }
+            }
+        }        
+        boolean flag=true;        
+        for(int i=0;i<arr1.length;i++)
+        {
+            if(arr1[i]!=arr2[i])
+            {
+               flag=false;
+               break;
+            }
+        }
+        if(!flag)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public static void main(String[] args) {
