@@ -1,0 +1,81 @@
+/*
+Objective
+Today, we're working with binary numbers. Check out the Tutorial tab for learning materials and an instructional video!
+
+Task
+Given a base- integer, , convert it to binary (base-). Then find and print the base- integer denoting the maximum number of consecutive 's in 's binary representation.
+
+Input Format
+
+A single integer, .
+
+Constraints
+
+Output Format
+
+Print a single base- integer denoting the maximum number of consecutive 's in the binary representation of .
+
+Sample Input 1
+
+5
+Sample Output 1
+
+1
+Sample Input 2
+
+13
+Sample Output 2
+
+2
+Explanation
+
+Sample Case 1:
+The binary representation of  is , so the maximum number of consecutive 's is .
+
+Sample Case 2:
+The binary representation of  is , so the maximum number of consecutive 's is .
+*/
+
+package main
+
+import (
+    "bufio"
+    "fmt"
+    "io"
+    "os"
+    "strconv"
+    "strings"
+)
+
+
+
+func main() {
+    reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
+
+    nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
+    checkError(err)
+    n := int32(nTemp)
+
+
+    var count int32=0
+    for ;n!=0;{
+        n=(n&(n<<1))
+        count++
+    }
+    fmt.Println(count)
+}
+
+func readLine(reader *bufio.Reader) string {
+    str, _, err := reader.ReadLine()
+    if err == io.EOF {
+        return ""
+    }
+
+    return strings.TrimRight(string(str), "\r\n")
+}
+
+func checkError(err error) {
+    if err != nil {
+        panic(err)
+    }
+}
